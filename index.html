@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wedding Atlas</title>
+<meta name="description" content="Real prices for destination wedding venues across Europe. Personalised venue shortlists from £69, researched by a bride who emailed over 400 venues.">
+<meta property="og:title" content="Wedding Atlas">
+<meta property="og:description" content="Real prices for destination wedding venues across Europe. Personalised shortlists from £69.">
+<meta property="og:image" content="https://weddingatlas.net/images/como.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=DM+Mono:wght@400;500&display=swap">
+<!--
+HOW TO EDIT THIS PAGE
+1. Photos: every tinted block with a small label is a <figure class="ph" ...>. To use a real photo, add
+   <img src="your-photo.jpg" alt="What the photo shows"> inside that figure, just before </figure>. It fills the box.
+2. Booking links: the three tier buttons go to the Tally forms (search for tally.so). "Start my shortlist" scrolls to pricing.
+3. Prices: the tiers only state "from €69". Search for TIER_PRICE to add a price to each card.
+-->
+<style>
+/* Layout: a travel atlas printed in two inks. Baby-pink paper, navy ink, bands that flip between the two; a rotating seal on the hero plate, a marquee of place names, photo plates set on offset blocks like pasted-in prints. */
+:root{
+  --pink:#F6D4DC;
+  --pink-2:#EFBFCC;
+  --pink-light:#FBE8EC;
+  --navy:#0E1C3A;
+  --navy-2:#182C57;
+  --paper:#FFF8F9;
+  --ink:#0E1C3A;
+  --ink-soft:#4C5A7C;
+  --line:#D9ADBA;
+  --line-dark:#2E4270;
+  --on-navy:#FBE8EC;
+  --on-navy-soft:#D4BEC8;
+  --display:"DM Serif Display","Didot","Bodoni 72",Georgia,serif;
+  --body:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --mono:"DM Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{background:var(--pink);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--navy)}
+img,svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--pink-2);outline-offset:3px}
+p{margin:0}
+
+.wrap{max-width:1160px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(60px,8vw,110px);scroll-margin-top:64px}
+#shortlist{position:relative;top:-64px;display:block;height:0}
+.band-navy{background:var(--navy);color:var(--on-navy)}
+.band-light{background:var(--pink-light)}
+
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+h1{font-size:clamp(3rem,7.4vw,6rem);line-height:.98;letter-spacing:-.01em}
+h2{font-size:clamp(2.2rem,4.6vw,3.6rem);line-height:1.02;letter-spacing:-.01em}
+h3{font-size:1.5rem;line-height:1.2}
+h1 em,h2 em{font-style:italic}
+h1 em{color:var(--pink-2);background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8c20-9 40 7 60 0s40-9 60 0 40 7 60 0 14-4 16-4' fill='none' stroke='%23EFBFCC' stroke-width='3' stroke-linecap='round'/></svg>") no-repeat left 100%/100% .32em;padding-bottom:.08em}
+
+.eyebrow{display:inline-block;font:600 11.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:9px 13px;border:1.5px solid currentColor;border-radius:999px;margin:0 0 22px}
+.band-navy .eyebrow{color:var(--pink-2)}
+.soft{color:var(--ink-soft)}
+.band-navy .soft{color:var(--on-navy-soft)}
+.lede{font-size:clamp(1.08rem,1.4vw,1.25rem);line-height:1.55;max-width:36rem}
+.measure{max-width:60ch}
+.coord{font:500 11.5px/1 var(--mono);letter-spacing:.08em}
+
+/* Buttons: pink stickers with a hard navy shadow */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font:600 15px/1 var(--body);text-decoration:none;cursor:pointer;white-space:nowrap;border:1.5px solid var(--navy);background:transparent;color:var(--navy);transition:transform .12s,box-shadow .12s,background .15s}
+.btn.primary{background:var(--pink-2);box-shadow:4px 4px 0 var(--navy)}
+.btn.primary:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--navy)}
+.btn.ghost:hover{background:var(--paper)}
+.btn.sm{padding:11px 16px;font-size:14px}
+.band-navy .btn.primary{box-shadow:4px 4px 0 var(--pink-2);border-color:var(--pink-2);background:var(--navy);color:var(--on-navy)}
+.band-navy .btn.primary:hover{box-shadow:2px 2px 0 var(--pink-2)}
+.band-navy .btn.ghost{border-color:var(--on-navy);color:var(--on-navy)}
+.band-navy .btn.ghost:hover{background:var(--navy-2)}
+.btn .arrow{font-family:var(--display);font-style:italic;font-size:1.25em;line-height:0}
+
+/* Nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--navy);color:var(--on-navy);border-bottom:1px solid var(--line-dark)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:14px}
+.brand{display:flex;align-items:baseline;gap:12px;text-decoration:none;color:inherit}
+.brand b{font:400 24px/1 var(--display);letter-spacing:.005em}
+.brand small{font:600 10px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--pink-2)}
+.menu{display:flex;gap:26px;align-items:center;list-style:none;margin:0;padding:0}
+.menu a{color:var(--on-navy-soft);text-decoration:none;font-weight:500;font-size:15px}
+.menu a:hover{color:var(--on-navy)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav .btn.primary{background:var(--pink-2);color:var(--navy);border-color:var(--pink-2);box-shadow:none}
+.nav .btn.primary:hover{transform:none;background:var(--pink)}
+.burger{display:none;border:1.5px solid var(--on-navy-soft);background:transparent;font:600 12px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;padding:10px 12px;cursor:pointer;color:var(--on-navy);border-radius:999px}
+.cta-long{display:inline}.cta-short{display:none}
+@media (max-width:860px){
+  .menu{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:flex-start;gap:0;background:var(--navy);border-bottom:1px solid var(--line-dark);padding-block:6px 14px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .menu li{width:100%}
+  .menu a{display:block;padding:13px 0;font-size:18px;border-top:1px solid var(--line-dark);color:var(--on-navy)}
+  .menu li:first-child a{border-top:0}
+  .nav.open .menu{display:flex}
+  .burger{display:inline-flex}
+  .cta-long{display:none}.cta-short{display:inline}
+}
+
+/* Photo plates: a print pasted onto an offset block */
+.plate{position:relative;max-width:100%}
+.plate::before{content:"";position:absolute;inset:14px -14px -14px 14px;background:var(--navy);z-index:0}
+.band-navy .plate::before{background:var(--pink-2)}
+.ph{position:relative;z-index:1;margin:0;overflow:hidden;border:1.5px solid var(--navy);background:linear-gradient(165deg,var(--ta,#F3DDE3) 0%,var(--tb,#D9ADBA) 100%);max-width:100%;aspect-ratio:4/5}
+.ph.wide{aspect-ratio:4/3}
+.ph::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600' preserveAspectRatio='xMidYMid slice'><g fill='none' stroke='%230E1C3A' stroke-opacity='.16' stroke-width='1.1'><path d='M-40 40C60-10 140 0 220 50S380 110 460 60S600-20 660 20'/><path d='M-40 110C60 60 140 70 220 120S380 180 460 130S600 50 660 90'/><path d='M-40 180C60 130 140 140 220 190S380 250 460 200S600 120 660 160'/><path d='M-40 250C60 200 140 210 220 260S380 320 460 270S600 190 660 230'/><path d='M-40 320C60 270 140 280 220 330S380 390 460 340S600 260 660 300'/><path d='M-40 390C60 340 140 350 220 400S380 460 460 410S600 330 660 370'/><path d='M-40 460C60 410 140 420 220 470S380 530 460 480S600 400 660 440'/><path d='M-40 530C60 480 140 490 220 540S380 600 460 550S600 470 660 510'/><path d='M-40 600C60 550 140 560 220 610S380 670 460 620S600 540 660 580'/></g></svg>") center/cover no-repeat}
+.ph::after{content:attr(data-label);position:absolute;left:12px;bottom:10px;font:600 10.5px/1.4 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--navy);background:var(--paper);padding:5px 8px;border:1px solid var(--navy)}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--focus,50% 50%);z-index:1}
+.ph.has-photo::before,.ph.has-photo::after{display:none}
+
+/* Hero */
+.hero{padding-block:clamp(48px,7vw,104px) clamp(56px,8vw,112px)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,6vw,88px);align-items:center}
+.hero .wrap>*{min-width:0}
+.hero .lede{margin:26px 0 34px}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.sticker{display:inline-block;margin-top:28px;transform:rotate(-3deg);background:var(--pink-2);color:var(--navy);border:1.5px solid var(--navy);padding:9px 14px;font:600 13px/1 var(--body);letter-spacing:.06em;text-transform:uppercase}
+.hero-fig{position:relative;padding:28px 0 0 28px}
+.hero .plate{margin-right:14px}
+.hero .coord{position:absolute;top:14px;right:14px;z-index:2;color:var(--navy);background:var(--paper);padding:9px 11px;border:1px solid var(--navy)}
+.seal{position:absolute;top:0;left:0;width:148px;height:148px;z-index:3;filter:drop-shadow(3px 3px 0 var(--pink-2))}
+.seal .ring{transform-origin:center;transform-box:fill-box}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:no-preference){.seal .ring{animation:spin 26s linear infinite}}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero .ph{aspect-ratio:4/3}.seal{width:112px;height:112px}.hero-fig{padding:22px 0 0 22px}}
+
+/* Marquee of place names */
+.marquee{overflow:hidden;background:var(--pink-2);color:var(--navy);border-block:1.5px solid var(--navy);padding-block:14px}
+.marquee .track{display:flex;width:max-content;gap:0;white-space:nowrap;font:italic 400 1.35rem/1 var(--display)}
+.marquee .track span{padding:0 22px;display:inline-flex;align-items:center;gap:22px}
+.marquee .track span::after{content:"✦";font-size:.7em;font-style:normal;opacity:.75}
+@keyframes slide{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:no-preference){.marquee .track{animation:slide 48s linear infinite}}
+@media (prefers-reduced-motion:reduce){.marquee .track{width:auto;white-space:normal;flex-wrap:wrap;justify-content:center}.marquee .track .dup{display:none}}
+
+/* Proof strip */
+.proof{padding-block:0;background:var(--pink)}
+.proof .wrap{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1.5px solid var(--navy)}
+@media (max-width:960px) and (min-width:701px){
+  .proof .wrap{grid-template-columns:1fr 1fr}
+  .proof div{border-bottom:1px solid var(--line)}
+  .proof div:nth-child(2n){border-right:0;padding-left:24px}
+  .proof div:nth-child(3){padding-left:0}
+  .proof div:nth-child(n+3){border-bottom:0}
+}
+.proof div{padding:26px 24px 26px 0;border-right:1.5px solid var(--navy);min-width:0}
+.proof div:not(:first-child){padding-left:24px}
+.proof div:last-child{border-right:0}
+.proof b{display:block;font:400 2.6rem/1 var(--display);margin-bottom:8px}
+.proof span{color:var(--ink-soft);font-size:15px}
+@media (max-width:700px){
+  .proof .wrap{grid-template-columns:1fr}
+  .proof div{border-right:0;border-bottom:1px solid var(--line);padding:18px 0}
+  .proof div:not(:first-child){padding-left:0}
+  .proof div:last-child{border-bottom:0}
+}
+
+/* Two columns */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,80px);align-items:start}
+.split>*{min-width:0}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3.5vw,48px);margin-top:56px}
+.steps>*{min-width:0}
+.step{border-top:1.5px solid var(--pink-2);padding-top:18px}
+.step .num{font:italic 400 5rem/1 var(--display);color:var(--pink-2);letter-spacing:-.02em}
+.step h3{margin:10px 0 12px}
+.step p{color:var(--on-navy-soft);font-size:16px}
+@media (max-width:860px){.steps{grid-template-columns:1fr;gap:32px}.step .num{font-size:3.6rem}}
+
+/* Destinations */
+.dest{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 24px;margin-top:56px}
+.dest article{min-width:0}
+.dest .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:18px 0 8px}
+.dest h3{font-size:1.35rem}
+.dest .coord{color:var(--ink-soft);flex:none}
+.dest p{color:var(--ink-soft);font-size:15.5px}
+.dest-note{margin-top:44px;font-size:16px;color:var(--ink-soft);max-width:60ch}
+@media (min-width:1001px){.dest article:nth-child(even){margin-top:44px}}
+@media (max-width:1000px){.dest{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.dest{grid-template-columns:1fr}}
+
+/* Pricing */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:52px}
+.tier{position:relative;background:var(--paper);border:1.5px solid var(--navy);box-shadow:8px 8px 0 var(--navy);padding:30px 28px 28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.tier.popular{background:var(--pink-2)}
+.tier .flag{position:absolute;top:-16px;right:18px;transform:rotate(3deg);background:var(--navy);color:var(--pink);padding:9px 13px;font:700 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase}
+.tier .tname{font:600 11.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.tier .n{font:400 4.4rem/1 var(--display);letter-spacing:-.02em}
+.tier .n small{display:inline-block;font:600 11.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-left:10px;vertical-align:.9em}
+.tier .price{display:flex;align-items:baseline;gap:10px;font:400 2rem/1 var(--display);padding-top:6px;border-top:1.5px solid var(--navy)}
+.tier .price small{font:500 13px/1 var(--body);color:var(--ink-soft)}
+.tier p{color:var(--ink-soft);font-size:15.5px;flex:1}
+.tier.popular p{color:var(--ink)}
+.tier .btn{align-self:flex-start}
+.tier.popular .btn.primary{background:var(--paper)}
+@media (max-width:860px){.tiers{grid-template-columns:1fr;gap:30px}}
+.includes{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.includes li{display:flex;gap:14px;align-items:flex-start;font-size:16.5px}
+.includes li::before{content:"✦";flex:none;color:var(--navy);font-size:.8em;margin-top:5px}
+.note{margin-top:30px;padding:18px 20px;border:1.5px solid var(--navy);background:var(--pink-2);font-size:15.5px}
+.note b{font-weight:700}
+
+/* Real pages from a shortlist */
+.pages-head{margin-top:80px;max-width:60ch}
+.pages-head h3{font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.1}
+.pages-head p{margin-top:14px;color:var(--ink-soft);font-size:1.05rem}
+.pages{display:grid;grid-template-columns:repeat(4,1fr);gap:34px 26px;margin-top:40px}
+.pages figure{margin:0;min-width:0}
+.pages .pg{display:block;width:100%;height:auto;border:1.5px solid var(--navy);box-shadow:8px 8px 0 var(--pink-2);background:var(--paper)}
+.pages figure:nth-child(odd) .pg{transform:rotate(-1.4deg)}
+.pages figure:nth-child(even) .pg{transform:rotate(1.4deg)}
+.pages figcaption{margin-top:22px;font-size:14.5px;color:var(--ink-soft);line-height:1.5}
+.pages figcaption b{display:block;color:var(--ink);font-weight:600;margin-bottom:3px}
+@media (max-width:1000px){.pages{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.pages{grid-template-columns:1fr;gap:38px}}
+
+/* Sample sheet */
+.sheet{position:relative;background:var(--paper);border:1.5px solid var(--navy);padding:30px 28px 26px;box-shadow:8px 8px 0 var(--pink-2)}
+.stamp{position:absolute;top:16px;right:16px;transform:rotate(-9deg);border:2px solid var(--navy);color:var(--navy);background:var(--pink-2);padding:5px 10px;font:700 11px/1 var(--body);letter-spacing:.16em;text-transform:uppercase}
+.sheet .tag{font:600 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 22px}
+.sheet dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:0 20px}
+.sheet dt,.sheet dd{border-top:1px solid var(--line);padding:12px 0}
+.sheet dt:first-of-type,.sheet dd:first-of-type{border-top:0;padding-top:0}
+.sheet dt{font:500 11.5px/1.7 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);padding-top:14px}
+.sheet dd{margin:0;font-size:15px;color:var(--ink-soft)}
+.sheet dd.title{font:400 1.6rem/1.15 var(--display);color:var(--ink)}
+@media (max-width:480px){.sheet dl{grid-template-columns:1fr}.sheet dd{border-top:0;padding-top:0}.sheet dt{padding-bottom:4px}}
+
+/* About */
+.about .plate{margin:14px 14px 14px 0}
+.tip{border-left:3px solid var(--navy);padding:4px 0 4px 22px;margin:34px 0 0;font:italic 400 1.5rem/1.35 var(--display)}
+.tip cite{display:block;font:600 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:14px;font-style:normal}
+.about-text p+p{margin-top:16px}
+
+/* Reviews */
+.reviews{display:grid;grid-template-columns:1fr 1fr;gap:40px 32px;margin-top:56px}
+.review{position:relative;background:var(--paper);border:1.5px solid var(--navy);box-shadow:8px 8px 0 var(--pink-2);padding:36px 30px 28px;min-width:0}
+.review:nth-child(odd){transform:rotate(-.8deg)}
+.review:nth-child(even){transform:rotate(.8deg)}
+.review .q{position:absolute;top:-20px;left:22px;width:46px;height:46px;display:grid;place-items:center;background:var(--pink-2);border:1.5px solid var(--navy);font:italic 400 2.6rem/1 var(--display);color:var(--navy);padding-top:10px}
+.review p{font-size:1.05rem;line-height:1.6}
+.review .who{margin-top:20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 12px;font:600 11.5px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.review .who b{color:var(--ink)}
+@media (max-width:760px){.reviews{grid-template-columns:1fr;gap:36px}}
+
+/* Follow */
+.handles{display:grid;gap:0;margin-top:8px}
+.handle{display:flex;justify-content:space-between;align-items:baseline;gap:16px;text-decoration:none;border-top:1.5px solid var(--line-dark);padding:22px 0;color:var(--on-navy);transition:padding-left .15s}
+.handle:last-child{border-bottom:1.5px solid var(--line-dark)}
+.handle:hover{padding-left:10px}
+.handle small{font:600 11px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--pink-2)}
+.handle span{font:400 clamp(1.5rem,3vw,2.2rem)/1.1 var(--display)}
+.handle .arrow{font:italic 400 1.6rem/1 var(--display);color:var(--pink-2)}
+
+/* FAQ */
+.faq{max-width:800px;margin-top:44px}
+.faq details{border-top:1.5px solid var(--navy)}
+.faq details:last-child{border-bottom:1.5px solid var(--navy)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:22px 0;font:600 1.1rem/1.35 var(--body)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:400 1.9rem/1 var(--display);flex:none;margin-top:-4px}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:0 0 24px;color:var(--ink-soft);max-width:62ch}
+
+/* Final */
+.final .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:end}
+.final .wrap>*{min-width:0}
+.final .cta-row{justify-content:flex-end}
+@media (max-width:860px){.final .wrap{grid-template-columns:1fr}.final .cta-row{justify-content:flex-start}}
+
+/* Footer */
+footer{background:var(--navy);color:var(--on-navy-soft);border-top:1.5px solid var(--pink-2);padding-block:40px 52px;font-size:14px}
+footer .wrap{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:28px}
+footer .wrap>*{min-width:0}
+footer h4{margin:0 0 12px;font:600 11px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--pink-2)}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+footer a{text-decoration:none;color:var(--on-navy)}
+footer a:hover{color:var(--pink-2)}
+footer .brand b{color:var(--on-navy)}
+.email{display:inline-flex;flex-wrap:wrap;align-items:center;gap:10px;font:500 14px/1 var(--mono);color:var(--on-navy)}
+.copy{border:1px solid var(--line-dark);background:transparent;font:600 11px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:7px 10px;cursor:pointer;color:var(--on-navy-soft);border-radius:999px}
+.copy:hover{color:var(--on-navy);border-color:var(--on-navy)}
+.legal{margin-top:28px;font-size:13px}
+@media (max-width:760px){footer .wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Wedding Atlas, back to top"><b>Wedding Atlas</b><small>Real venue prices</small></a>
+    <ul class="menu" id="menu">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="btn primary sm" href="#pricing"><span class="cta-long">Start my shortlist</span><span class="cta-short">Shortlist</span></a>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero band-navy">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Destination wedding venues · real prices</span>
+        <h1>I emailed <em>400 venues</em> so you don't have to.</h1>
+        <p class="lede soft">When I was planning my own wedding abroad I ended up contacting over 400 venues just to find out what they cost. Now I do that bit for you. Tell me your budget, how many guests and where you're thinking, and I'll put together a detailed shortlist of venues that actually fit, with the real prices and who to email, presented properly so you'll want to keep coming back to it.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#pricing">Start my shortlist <span class="arrow">→</span></a>
+          <a class="btn ghost" href="#how">How it works</a>
+        </div>
+        <span class="sticker">Fill in a form, no calls · from £69</span>
+      </div>
+      <div class="hero-fig">
+        <svg class="seal" viewBox="0 0 160 160" aria-hidden="true">
+          <defs><path id="sealpath" d="M80,80 m-60,0 a60,60 0 1,1 120,0 a60,60 0 1,1 -120,0"/></defs>
+          <g class="ring">
+            <circle cx="80" cy="80" r="78" style="fill:#EFBFCC;stroke:#0E1C3A;stroke-width:1.5"/>
+            <text style="font-family:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:2.4px;fill:#0E1C3A"><textPath href="#sealpath">REAL PRICES · 400+ VENUES · BY A BRIDE · </textPath></text>
+          </g>
+          <text x="80" y="93" text-anchor="middle" style="font-family:'DM Serif Display',Georgia,serif;font-size:38px;fill:#0E1C3A">WA</text>
+        </svg>
+        <div class="plate">
+          <span class="coord">45.99° N · 9.26° E</span>
+          <figure class="ph has-photo" style="--focus:50% 62%"><img src="images/como.jpg" alt="Wedding ceremony set up on a lakeside terrace at Lake Como, with a wooden boat on the water and the hills behind"></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Lake Como</span><span>Tuscany</span><span>Amalfi</span><span>Santorini</span><span>Mallorca</span><span>Andalusia</span><span>Provence</span><span>Algarve</span><span>Albanian Riviera</span><span>Puglia</span><span>Lake Garda</span><span>Lisbon</span><span>Corfu</span><span>Ibiza</span>
+      <span class="dup">Lake Como</span><span class="dup">Tuscany</span><span class="dup">Amalfi</span><span class="dup">Santorini</span><span class="dup">Mallorca</span><span class="dup">Andalusia</span><span class="dup">Provence</span><span class="dup">Algarve</span><span class="dup">Albanian Riviera</span><span class="dup">Puglia</span><span class="dup">Lake Garda</span><span class="dup">Lisbon</span><span class="dup">Corfu</span><span class="dup">Ibiza</span>
+    </div>
+  </div>
+
+  <section class="proof">
+    <div class="wrap">
+      <div><b>400+</b><span>venues I've contacted and got prices from</span></div>
+      <div><b>127+</b><span>shortlists made for real couples</span></div>
+      <div><b>2.3M+</b><span>views on my venue tours across Instagram and TikTok</span></div>
+      <div><b>All of Europe</b><span>Italy, Greece, Spain, France, Portugal, Albania and anywhere else you're thinking</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow">The problem</span>
+        <h2>Nobody puts the <em>price</em> on the website.</h2>
+      </div>
+      <div class="measure">
+        <p class="lede soft">You find a venue you love, you email them, you wait a week, you get a brochure, and it turns out it was never going to work for your budget. Then you do it all again with the next one.</p>
+        <p class="lede" style="margin-top:18px">I've already done that bit, hundreds of times over, so you can start with the venues you can actually afford.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-navy" id="how">
+    <div class="wrap">
+      <span class="eyebrow">How it works</span>
+      <h2>Here's how it <em>works</em></h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num">I.</div>
+          <h3>Fill in the form</h3>
+          <p>It takes about ten minutes and there's no call. I ask about your budget, guest numbers, when you're thinking, which countries you like and the sort of place you picture, whether that's a villa, a castle, something by the beach or a vineyard.</p>
+        </div>
+        <div class="step">
+          <div class="num">II.</div>
+          <h3>I go through my research</h3>
+          <p>I've got brochures, quotes and emails from hundreds of venues, and I add to them every time I travel. I pick the ones that fit your numbers and your style, and I always leave room in the budget for everything that comes after the venue.</p>
+        </div>
+        <div class="step">
+          <div class="num">III.</div>
+          <h3>Your shortlist lands in your inbox</h3>
+          <p>Not a list of links. A properly researched, beautifully put-together shortlist: a photo page and a full write-up for every venue, the real rates, a total worked out for your guest count, and my personal ranking at the end. It comes as a PDF to keep, print and send to your partner. Then you get in touch with the venues yourself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="destinations">
+    <div class="wrap">
+      <span class="eyebrow">Where I've been looking</span>
+      <h2>The places I get asked about <em>most</em></h2>
+      <div class="dest">
+        <article>
+          <div class="plate"><figure class="ph wide has-photo" style="--focus:50% 78%"><img src="images/como.jpg" alt="Ceremony chairs and a white floral arch on a terrace above Lake Como"></figure></div>
+          <div class="top"><h3>Lake Como</h3><span class="coord">45.99° N</span></div>
+          <p>Villas right on the water. You can do the ceremony on the terrace and bring guests over by boat.</p>
+        </article>
+        <article>
+          <div class="plate"><figure class="ph wide has-photo" style="--focus:50% 45%"><img src="images/tuscany.jpg" alt="A stone villa in Tuscany with formal gardens, topiary and cypress trees in front"></figure></div>
+          <div class="top"><h3>Tuscany</h3><span class="coord">43.5° N</span></div>
+          <p>Farmhouses and old estates in the countryside, usually with rooms on site so everyone can stay.</p>
+        </article>
+        <article>
+          <div class="plate"><figure class="ph wide has-photo" style="--focus:50% 60%"><img src="images/greece.jpg" alt="Clear ghost chairs and a white floral arch on a lawn above the sea in Greece"></figure></div>
+          <div class="top"><h3>Greek Islands</h3><span class="coord">37.0° N</span></div>
+          <p>White villas with the sea behind you and long, warm evenings.</p>
+        </article>
+        <article>
+          <div class="plate"><figure class="ph wide has-photo" style="--focus:45% 55%"><img src="images/mallorca.jpg" alt="Rattan chairs set up beside a stone temple on a cliff above the sea in Mallorca"></figure></div>
+          <div class="top"><h3>Mallorca</h3><span class="coord">39.7° N</span></div>
+          <p>Fincas up in the hills and big estates on the coast, all close to the beach.</p>
+        </article>
+        <article>
+          <div class="plate"><figure class="ph wide has-photo" style="--focus:50% 50%"><img src="images/andalusia.jpg" alt="A couple saying their vows under an ironwork gazebo looking out over the hills of Andalusia"></figure></div>
+          <div class="top"><h3>Andalusia</h3><span class="coord">36.5° N</span></div>
+          <p>Haciendas and places along the coast, and it's still warm enough for an October wedding.</p>
+        </article>
+        <article>
+          <div class="plate"><figure class="ph wide has-photo" style="--focus:50% 50%"><img src="images/france.jpg" alt="A pink villa on the French Riviera with formal gardens and a long pool leading up to it"></figure></div>
+          <div class="top"><h3>South of France</h3><span class="coord">43.6° N</span></div>
+          <p>Châteaux and domaines, lavender if you go in July, dinner outside in the courtyard.</p>
+        </article>
+        <article>
+          <div class="plate"><figure class="ph wide has-photo" style="--focus:50% 58%"><img src="images/algarve.jpg" alt="Ceremony chairs lining a gravel aisle through formal gardens towards a blue and white palace in Portugal"></figure></div>
+          <div class="top"><h3>Algarve</h3><span class="coord">37.1° N</span></div>
+          <p>Quintas and cliff-top villas with the beach right there, and good value for what you get.</p>
+        </article>
+        <article>
+          <div class="plate"><figure class="ph wide has-photo" style="--focus:50% 35%"><img src="images/albania.jpg" alt="White ceremony chairs on a deck at the foot of a cliff beside the sea on the Albanian Riviera"></figure></div>
+          <div class="top"><h3>Albanian Riviera</h3><span class="coord">40.1° N</span></div>
+          <p>Across the water from Corfu. Still quiet, prices to match, and venues that want to host weddings.</p>
+        </article>
+      </div>
+      <p class="dest-note">Como and Tuscany are the two I get asked about most, but I cover the whole of Europe. If the place you want isn't here, just put it on the form.</p>
+    </div>
+  </section>
+
+  <section class="band-light" id="pricing">
+    <span id="shortlist" aria-hidden="true"></span>
+    <div class="wrap">
+      <span class="eyebrow">Pricing</span>
+      <h2>Shortlists start at <em>£69</em></h2>
+      <p class="lede soft" style="margin-top:18px">Pick how many venues you want. Every shortlist is researched from scratch for you, and most land in your inbox within 72 hours.</p>
+      <div class="tiers">
+        <div class="tier">
+          <span class="tname">The Shortlist</span>
+          <div class="n">3<small>venues</small></div>
+          <div class="price">£69</div>
+          <p>For brides who already have a rough idea and want an expert sense-check before going any deeper. Three venues matched to your budget, guest count and style, with real pricing for each one and every hidden catch flagged.</p>
+          <a class="btn primary sm" href="https://tally.so/r/zxglrZ" target="_blank" rel="noopener">Choose The Shortlist <span class="arrow">→</span></a>
+        </div>
+        <div class="tier popular">
+          <span class="flag">Most popular</span>
+          <span class="tname">The Full Picture</span>
+          <div class="n">6<small>venues</small></div>
+          <div class="price">£129</div>
+          <p>Enough room to compare two regions, or a villa against a castle, properly. Six venues with pricing, guest capacity, accommodation and direct venue contacts, and any supplier restrictions flagged before they become a problem.</p>
+          <a class="btn primary sm" href="https://tally.so/r/Me7ra8" target="_blank" rel="noopener">Choose The Full Picture <span class="arrow">→</span></a>
+        </div>
+        <div class="tier">
+          <span class="tname">The Insider Edit</span>
+          <div class="n">10<small>venues</small></div>
+          <div class="price">£179</div>
+          <p>The full search, for when you're still deciding between countries or styles. Ten venues with a complete breakdown of why each one suits you, plus the catches, how they compare and what to ask for, written up so you go into every email knowing exactly where you stand.</p>
+          <a class="btn primary sm" href="https://tally.so/r/Bz6NQ4" target="_blank" rel="noopener">Choose The Insider Edit <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="pages-head">
+        <h3>This is what a real one looks like</h3>
+        <p>Pages from a shortlist I made for a couple getting married in Europe in June 2027. Every venue gets three pages, and the whole thing ends with my ranking.</p>
+      </div>
+      <div class="pages">
+        <figure>
+          <img class="pg" src="images/page-photos.jpg" alt="A shortlist page with four photographs of a château in Languedoc, France" loading="lazy">
+          <figcaption><b>A photo page for every venue</b>Four shots, so you get a feel for the place before you read a word.</figcaption>
+        </figure>
+        <figure>
+          <img class="pg" src="images/page-estate.jpg" alt="A shortlist page describing why the venue fits the couple's brief, with accommodation, capacity and how to get there" loading="lazy">
+          <figcaption><b>Why it fits your brief</b>Written for you, not copied from the venue. Plus rooms on site, capacity and how to get there.</figcaption>
+        </figure>
+        <figure>
+          <img class="pg" src="images/page-rates.jpg" alt="A shortlist page with the venue's rates, what's included, who to contact and a total for the couple's guest count" loading="lazy">
+          <figcaption><b>Rates and details</b>Hire, food and drink per person, what's included, who to contact, and a total worked out for your guest count. Blurred here, not in yours.</figcaption>
+        </figure>
+        <figure>
+          <img class="pg" src="images/page-ranking.jpg" alt="The final page of a shortlist, ranking all eleven venues in order with a total for each" loading="lazy">
+          <figcaption><b>My personal ranking</b>Every venue in order, with its total next to it, so you know where I'd start.</figcaption>
+        </figure>
+      </div>
+
+      <div class="split" style="margin-top:80px">
+        <div>
+          <h3 style="font-size:1.9rem">What's in every shortlist</h3>
+          <p class="soft" style="margin-top:14px;max-width:34rem">Whether you pick 3, 6 or 10 venues, every one of them gets the full treatment.</p>
+          <div class="note"><b>Just so you know, I'm not a wedding planner.</b> I do the research and the shortlist, then you contact the venues and book directly with them.</div>
+        </div>
+        <ul class="includes">
+          <li>Your brief, written back to you so you can see I've understood it</li>
+          <li>A photo page for every venue</li>
+          <li>Why each one fits your brief, in plain words</li>
+          <li>Rooms on site, capacity and how to get there</li>
+          <li>The real rates: hire, food and drink per person, and what's included</li>
+          <li>A total worked out for your guest count, so you can see how each venue sits against your budget</li>
+          <li>Who to contact at each venue</li>
+          <li>My personal ranking at the end</li>
+          <li>All of it designed and delivered as a PDF you'll want to keep, print and share</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow">About</span>
+        <h2>A bit about <em>me</em></h2>
+        <blockquote class="tip">The catering price in the brochure is usually for a sit-down meal with no drinks. That's why I look for venues at the lower end of your budget, so there's still money left for the bar, flowers, music, a planner and a celebrant.<cite>The thing I tell every bride</cite></blockquote>
+      </div>
+      <div class="about-text">
+        <p class="lede" style="color:var(--ink)">I started Wedding Atlas while I was planning my own wedding abroad. I wanted a villa with a view and a price I could trust, and every single website said “enquire for pricing”. So I did, over 400 times.</p>
+        <p>All of that ended up in a spreadsheet, and that spreadsheet is what I now use to build shortlists for other brides. I add to it every time I travel and see venues in person.</p>
+        <p>I'm getting married in 2027, so I'm going through all of this at the same time as you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-light" id="reviews">
+    <div class="wrap">
+      <span class="eyebrow">Reviews</span>
+      <h2>What brides have <em>said</em></h2>
+      <p class="lede soft" style="margin-top:18px">Real messages from couples after their shortlist arrived. First names only.</p>
+      <div class="reviews">
+        <div class="review">
+          <span class="q" aria-hidden="true">“</span>
+          <p>Thank you so much for putting together the venue shortlist! I absolutely loved it, and it has saved me sooo much time - I really appreciate all the effort that went into it. I especially love Option 3. It's definitely my favourite and really stands out to me. Thanks again for making this process so much easier!</p>
+          <div class="who"><b>Sandra</b><span>By email</span></div>
+        </div>
+        <div class="review">
+          <span class="q" aria-hidden="true">“</span>
+          <p>Wedding Atlas is an absolutely fantastic service. Myself and my partner have spent the past 3 months searching for the perfect venue, feeling overwhelmed and unsure where to start. Wedding Atlas has taken that stress away, providing us with beautiful venues, contact details, cost breakdowns and photos. We couldn't recommend them enough and we wish we had used the service earlier!</p>
+          <div class="who"><b>Anna</b><span>Italy &amp; France · by email</span></div>
+        </div>
+        <div class="review">
+          <span class="q" aria-hidden="true">“</span>
+          <p>I just want to say a massive thank you for your service. You have provided us with some really great options all within our budget and with all of our requests. You have gone above and beyond with the service, replying within 24 hours with 7 amazing venues and prices included. Would highly recommend your service to any bride/groom to be who needs some help with searching for their special venue.</p>
+          <div class="who"><b>Nicole</b><span>Greece · by email</span></div>
+        </div>
+        <div class="review">
+          <span class="q" aria-hidden="true">“</span>
+          <p>I would definitely recommend Wedding Atlas if you're in search for a wedding venue. The shortlist was sent to me within 2 days and was set out clear and very detailed. I also had some additional questions, which she helped me with - nothing was too much trouble. Thank you again!!</p>
+          <div class="who"><b>Ellie</b><span>Italy · by email</span></div>
+        </div>
+        <div class="review">
+          <span class="q" aria-hidden="true">“</span>
+          <p>Okay WOW! Thank you so much for sending this over! I'm going to go through it with my partner this weekend and will let you know if I have any questions. And I'll absolutely keep you in the loop, thank you SO much for your help! This makes me so much more excited about a wedding I truly can't thank you enough.</p>
+          <div class="who"><b>A bride</b><span>Instagram DM</span></div>
+        </div>
+        <div class="review">
+          <span class="q" aria-hidden="true">“</span>
+          <p>Thank you so much for the detailed recommendation of venues. These are beautiful and some I'm sure I could not have found on our own.</p>
+          <div class="who"><b>L.</b><span>Instagram DM</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-navy">
+    <div class="wrap split" style="align-items:center">
+      <div>
+        <span class="eyebrow">Follow along</span>
+        <h2>Come and see the <em>venues</em> first</h2>
+        <p class="lede soft" style="margin-top:20px">I share the venues I visit on Instagram and TikTok, with the hire fee right there on screen. The longer write-ups (things like what 50 guests costs in Como vs Tuscany) go out in my newsletter.</p>
+      </div>
+      <div class="handles">
+        <a class="handle" href="https://www.instagram.com/weddingatlas.co/" target="_blank" rel="noopener"><div><small>Instagram</small><br><span>@weddingatlas.co</span></div><span class="arrow">→</span></a>
+        <a class="handle" href="https://www.tiktok.com/@weddingatlas" target="_blank" rel="noopener"><div><small>TikTok</small><br><span>@weddingatlas</span></div><span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-light" id="faq">
+    <div class="wrap">
+      <span class="eyebrow">Questions</span>
+      <h2>Things people <em>ask</em> me</h2>
+      <div class="faq">
+        <details>
+          <summary>Are you a wedding planner?</summary>
+          <p>No. I find and shortlist venues. Once you've got your shortlist, you get in touch with the venues yourself and the planning is yours (or your planner's).</p>
+        </details>
+        <details>
+          <summary>Do you contact the venues for me?</summary>
+          <p>No. Each entry tells you who to email and what to ask, so your first message is a good one. Booking directly also means it's just you and the venue, no middle person.</p>
+        </details>
+        <details>
+          <summary>Why is there no call?</summary>
+          <p>Because the form tells me everything I need, and it keeps the price down. You do it once, whenever suits you, and I work from that. If you have questions once your shortlist arrives, just reply to the email.</p>
+        </details>
+        <details>
+          <summary>Where do the prices come from?</summary>
+          <p>From the venues. Brochures, quotes and emails from over 400 enquiries, and I keep updating them as I travel. Prices do move with the season and the year, so each entry tells you what to double-check when you email.</p>
+        </details>
+        <details>
+          <summary>Which countries do you cover?</summary>
+          <p>Anywhere in Europe. Italy, Greece, Spain and France come up the most, but I've looked at Portugal, Albania and plenty of others too. Just put the place on the form.</p>
+        </details>
+        <details>
+          <summary>Is the fee the cost of the venue?</summary>
+          <p>No, the fee is for the research. The actual hire fees and catering prices for each venue are in your shortlist, so you know what you'd be paying before you email anyone.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-navy final">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Ready?</span>
+        <h2>Your venue is probably already in my <em>spreadsheet.</em></h2>
+        <p class="lede soft" style="margin-top:18px">The form takes about ten minutes. Shortlists start at £69 and arrive in your inbox, researched and designed just for you.</p>
+      </div>
+      <div class="cta-row">
+        <a class="btn primary sm" href="https://tally.so/r/zxglrZ" target="_blank" rel="noopener">3 venues</a>
+        <a class="btn primary sm" href="https://tally.so/r/Me7ra8" target="_blank" rel="noopener">6 venues</a>
+        <a class="btn primary sm" href="https://tally.so/r/Bz6NQ4" target="_blank" rel="noopener">10 venues</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#top"><b>Wedding Atlas</b></a>
+      <p style="margin-top:12px;max-width:34ch">Real prices for destination wedding venues, from a bride who asked.</p>
+      <p class="legal">© 2026 Wedding Atlas · weddingatlas.net</p>
+    </div>
+    <div>
+      <h4>Say hello</h4>
+      <div class="email"><span id="email-text">info@weddingatlas.net</span><button class="copy" type="button" data-copy="info@weddingatlas.net" data-target="email-text">Copy</button></div>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/weddingatlas.co/" target="_blank" rel="noopener">Instagram · @weddingatlas.co</a></li>
+        <li><a href="https://www.tiktok.com/@weddingatlas" target="_blank" rel="noopener">TikTok · @weddingatlas</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  var burger=document.getElementById('burger');
+  function setMenu(open){
+    nav.classList.toggle('open',open);
+    burger.setAttribute('aria-expanded',open?'true':'false');
+    burger.textContent=open?'Close':'Menu';
+  }
+  burger.addEventListener('click',function(){setMenu(!nav.classList.contains('open'));});
+
+  function jumpToHash(){
+    var id=(location.hash||'').replace('#','');
+    if(!id)return;
+    var el=document.getElementById(id);
+    if(!el)return;
+    setTimeout(function(){el.scrollIntoView({block:'start'});},60);
+  }
+  jumpToHash();
+  window.addEventListener('hashchange',jumpToHash);
+  window.addEventListener('load',jumpToHash);
+  nav.querySelectorAll('.menu a, .nav .btn').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var text=btn.getAttribute('data-copy');
+      function done(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy';},1600);}
+      function select(){
+        var el=document.getElementById(btn.getAttribute('data-target'));
+        if(!el)return;
+        var range=document.createRange();range.selectNodeContents(el);
+        var sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);
+      }
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,select);
+      }else{select();}
+    });
+  });
+})();
+</script>
+</body>
+</html>
